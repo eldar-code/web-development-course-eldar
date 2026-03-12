@@ -36,5 +36,5 @@ def delete_student(student_id):
         if student["id"] == student_id:
             students.remove(student)
             return student
-    raise KeyError(f"student not found: {student_id}")
+    raise KeyError(f"Student with id {student_id} not deleted because not found: ")
 
