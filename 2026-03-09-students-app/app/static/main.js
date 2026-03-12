@@ -10,41 +10,41 @@
     const btUpdate = document.getElementById("btUpdate");
     const btDelete = document.getElementById("btDelete");
 
-    btAdd.addEventListener("click", async function() {
+    btAdd.addEventListener("click", async function () {
         const name = nameBox.value;
         const age = ageBox.value;
-        if(!name||!age){
+        if (!name || !age) {
             alert("Enter name and age!");
             return;
         }
-        const student = {name, age};
+        const student = { name, age };
         const response = await axios.post("/students", student);
         getAll();
     });
 
     btDelete.addEventListener("click", async function () {
         const id = idBox.value;
-        if(!id){
+        if (!id) {
             alert("Enter ID!");
             return;
         }
-        try{
+        try {
             await axios.delete(`/students/${id}`);
             getAll();
-        }catch(error){
+        } catch (error) {
             //console.dir(error);
             alert(error.response.data.message);
         }
     })
-    
+
     window.addEventListener("load", getAll);
-    
+
 
     async function getAll() {
         let response = await axios.get("/students");
         const students = response.data;
         let content = "";
-        for (const s of students){
+        for (const s of students) {
             content += `
                 <tr>
                   <td>${s.id}</td>
@@ -54,6 +54,6 @@
             `;
         }
         tbody.innerHTML = content;
-        
+
     }
 }

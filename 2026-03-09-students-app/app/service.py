@@ -6,6 +6,7 @@ students = [
 
 next_id = 3
 
+
 # application logic
 
 def add_student(student):
@@ -15,14 +16,17 @@ def add_student(student):
     students.append(student)
     return student
 
+
 def get_students():
     return students
+
 
 def get_student(student_id):
     for student in students:
         if student["id"] == student_id:
             return student
     raise KeyError(f"student not found: {student_id}")
+
 
 def update_student(student_update):
     for student in students:
@@ -31,10 +35,10 @@ def update_student(student_update):
             return student
     raise KeyError(f"student not found: {student_update['id']}")
 
+
 def delete_student(student_id):
     for student in students:
         if student["id"] == student_id:
             students.remove(student)
             return student
     raise KeyError(f"Student with id {student_id} not deleted because not found: ")
-
