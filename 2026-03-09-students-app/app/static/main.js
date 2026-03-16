@@ -13,20 +13,20 @@
     const btDelete = document.getElementById("btDelete");
 
     // update student
-    btUpdate.addEventListener("click", async function(){
+    btUpdate.addEventListener("click", async function () {
         const id = +idBox.value;
         const name = nameBox.value;
         const age = +ageBox.value;
-        if(!id || !name || !age){
+        if (!id || !name || !age) {
             alert("You must enter Id, Name and Age!")
             return;
         }
-        const student = {id, name, age};
+        const student = { id, name, age };
 
-        try{
+        try {
             await axios.put("/students", student);
             await getAll();
-        }catch(error){
+        } catch (error) {
             const msg = error.response.data.message;
             alert(msg);
         }
@@ -45,10 +45,14 @@
         const response = await axios.post("/students", student);
         await getAll();
     });
-    
+
     // delete student
     btDelete.addEventListener("click", async function () {
         const id = idBox.value;
+        deleteStudent(id);
+    })
+
+    async function deleteStudent(id) {
         if (!id) {
             alert("Enter ID!");
             return;
@@ -60,11 +64,11 @@
             //console.dir(error);
             alert(error.response.data.message);
         }
-    })
-    
+    }
+
     window.addEventListener("load", getAll);
-    
-    
+
+
     // get all students
     async function getAll() {
         let response = await axios.get("/students");
@@ -76,9 +80,19 @@
                   <td>${s.id}</td>
                   <td>${s.name}</td>
                   <td>${s.age}</td>
+                  <td><button class="delete-btn" data-id="${s.id}">X</button></td>
                 </tr>
             `;
         }
         tbody.innerHTML = content;
+        // to register all delete buttons - get an array of all delete buttons
+        const deleteButtons = Array.from(document.getElementsByClassName("delete-btn"));
+        deleteButtons.forEach(button=>{
+            button.addEventListener("click", function(){
+                const studentId = button.getAttribute("data-id");
+                deleteStudent(studentId);
+            });
+        });
+
     }
 }
