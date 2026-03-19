@@ -21,7 +21,7 @@
             alert("You must enter Id, Name and Age!")
             return;
         }
-        const student = { id, name, age };
+        const student = {id, name, age};
 
         try {
             await axios.put("/students", student);
@@ -41,9 +41,14 @@
             alert("Enter name and age!");
             return;
         }
-        const student = { name, age };
-        const response = await axios.post("/students", student);
-        await getAll();
+
+        const student = {name, age};
+        try {
+            const response = await axios.post("/students", student);
+            await getAll();
+        } catch (error) {
+            alert("Add student failed - " + error.response.data.message)
+        }
     });
 
     // delete student
@@ -87,8 +92,8 @@
         tbody.innerHTML = content;
         // to register all delete buttons - get an array of all delete buttons
         const deleteButtons = Array.from(document.getElementsByClassName("delete-btn"));
-        deleteButtons.forEach(button=>{
-            button.addEventListener("click", function(){
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
                 const studentId = button.getAttribute("data-id");
                 deleteStudent(studentId);
             });

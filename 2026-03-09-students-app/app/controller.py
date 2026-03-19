@@ -36,8 +36,11 @@ def get_student(student_id):
 def add_student():
     student = request.get_json()
     normalize_student(student)
-    student = service.add_student(student)
-    return jsonify(student), 201
+    try:
+        student = service.add_student(student)
+        return jsonify(student), 201
+    except service.ServiceError as e:
+        return jsonify({"message": str(e)}), 400
 
 
 @students_app.put("/students")
