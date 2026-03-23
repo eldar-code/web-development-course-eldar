@@ -1,5 +1,6 @@
 import pymysql
-
+#  THIS IS CLIENT OF MYSQL SERVER
+# configuration for connecting to MySql server
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
