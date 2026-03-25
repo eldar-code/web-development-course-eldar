@@ -1,3 +1,5 @@
+# WE DON'T WANT TO TEST THIS MODULE
+
 def get_weather(city):
     print("\nCalling real weather API...")
     return {"city": city, "temp": 25}
