@@ -1,5 +1,5 @@
 # application logic
-import db
+import app.db as db
 
 class ServiceError(Exception):pass
 
@@ -24,4 +24,5 @@ def update_student(student_update):
 
 def delete_student(student_id):
     return db.delete_student(student_id)
+
 
