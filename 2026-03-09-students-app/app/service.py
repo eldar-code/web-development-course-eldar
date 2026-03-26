@@ -1,7 +1,9 @@
 # application logic
 import app.db as db
 
-class ServiceError(Exception):pass
+
+class ServiceError(Exception): pass
+
 
 def add_student(student):
     """Add a student - legal student age is in the range 18 - 120"""
@@ -24,5 +26,3 @@ def update_student(student_update):
 
 def delete_student(student_id):
     return db.delete_student(student_id)
-
-

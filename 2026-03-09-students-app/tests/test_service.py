@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, Mock
 
-import app.service
+from app.service import ServiceError
 from app import service
 
 
@@ -48,3 +48,9 @@ class TestService(TestCase):
 
         # validate
         self.assertEqual(3, mock_add_student.call_count)
+
+    @patch("app.service.db.add_student")
+    def test_add_student_too_young(self, mock_add_student: Mock):
+        mock_add_student.side_effect = ServiceError("add student failed")
+        self.assertRaises(ServiceError, service.add_student, {'name': 'Mock Student', 'age': 11, 'id': 101})
+        mock_add_student.assert_not_called()
