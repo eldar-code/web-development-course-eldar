@@ -1,4 +1,5 @@
 import pymysql
+
 #  THIS IS CLIENT OF MYSQL SERVER
 # configuration for connecting to MySql server
 DB_CONFIG = {
@@ -76,5 +77,3 @@ def delete_student(student_id):
         return student
     finally:
         con.close()
-
-
